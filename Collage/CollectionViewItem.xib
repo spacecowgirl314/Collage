@@ -14,7 +14,7 @@
             <subviews>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6CP-6Q-c54">
                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="f2f-2G-0u0"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" id="f2f-2G-0u0"/>
                 </imageView>
             </subviews>
             <constraints>

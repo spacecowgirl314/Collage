@@ -9,7 +9,8 @@
 import Foundation
 import Cocoa
 
-class CollageView: NSCollectionView, ImageCollectionDelegate, NSCollectionViewDataSource, NSCollectionViewDelegate {
+class CollageView: NSView, ImageCollectionDelegate, NSCollectionViewDataSource, NSCollectionViewDelegate {
+    private var collectionView: NSCollectionView?
     var items: [URL]?
     
     override var frame: CGRect {
@@ -31,11 +32,15 @@ class CollageView: NSCollectionView, ImageCollectionDelegate, NSCollectionViewDa
         let collection = ImageCollection(url: URL(string:"http://cybercatgurrl.tumblr.com/rss")!)
         collection.delegate = self
         collection.parse()
-        self.dataSource = self
-//        self.delegate = self
-        self.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
-        self.autoresizesSubviews = true
-        self.collectionViewLayout = NSCollectionViewFlowLayout()
+        collectionView = NSCollectionView.init(frame: bounds)
+        if let collectionView = collectionView {
+            collectionView.dataSource = self
+            collectionView.delegate = self
+            collectionView.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
+            collectionView.autoresizesSubviews = true
+            collectionView.collectionViewLayout = NSCollectionViewFlowLayout()
+            self.addSubview(collectionView)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -43,13 +48,15 @@ class CollageView: NSCollectionView, ImageCollectionDelegate, NSCollectionViewDa
     }
     
     // what is this private API thing that keeps being called????
-//    class func spansScreens() -> ObjCBool {
-//        return ObjCBool(false)
-//    }
+    //    class func spansScreens() -> ObjCBool {
+    //        return ObjCBool(false)
+    //    }
     
     func didFinishLoading(urls: [URL]) {
         items = urls
-        self.reloadData()
+        if let collectionView = collectionView {
+            collectionView.reloadData()
+        }
     }
     
     func didFailLoading() {
@@ -70,7 +77,7 @@ class CollageView: NSCollectionView, ImageCollectionDelegate, NSCollectionViewDa
         return item
     }
     
-    func collectionView(collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> NSSize {
+    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> NSSize {
         return NSSize(width: 300, height: 300)
     }
     
@@ -78,12 +85,12 @@ class CollageView: NSCollectionView, ImageCollectionDelegate, NSCollectionViewDa
         return 1
     }
     
-//    func collectionView(_ collectionView: NSCollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> NSView {
-//        let view = NSView(frame: NSRect(origin: CGPoint.zero, size: CGSize(width: 200, height: 200)))
-//        let image = NSImage(named: NSImageNameComputer)
-//        let imageView = NSImageView(frame: view.bounds)
-//        imageView.image = image
-//        view.addSubview(imageView)
-//        return view
-//    }
+    //    func collectionView(_ collectionView: NSCollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> NSView {
+    //        let view = NSView(frame: NSRect(origin: CGPoint.zero, size: CGSize(width: 200, height: 200)))
+    //        let image = NSImage(named: NSImageNameComputer)
+    //        let imageView = NSImageView(frame: view.bounds)
+    //        imageView.image = image
+    //        view.addSubview(imageView)
+    //        return view
+    //    }
 }
