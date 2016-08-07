@@ -51,6 +51,12 @@
             ReferencedContainer = "container:Collage.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-debug -background -module &quot;/Users/hachidorii/Library/Developer/Xcode/DerivedData/Collage-bpuvxdirglmtascuzielulmglrss/Build/Products/Debug/Collage&quot;"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
