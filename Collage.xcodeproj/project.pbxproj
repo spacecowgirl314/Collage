@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		89316A1F1D57EA1F00E30B6D /* CollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89316A1E1D57EA1F00E30B6D /* CollectionViewItem.swift */; };
+		89316A201D57EA1F00E30B6D /* CollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89316A1E1D57EA1F00E30B6D /* CollectionViewItem.swift */; };
+		89316A221D57F8CC00E30B6D /* CollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89316A211D57F8CC00E30B6D /* CollectionViewItem.xib */; };
+		89316A231D57F8CC00E30B6D /* CollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89316A211D57F8CC00E30B6D /* CollectionViewItem.xib */; };
 		89518D111D53ECEB0039F5F2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89518D101D53ECEB0039F5F2 /* MainView.swift */; };
 		89C58DA61D56E3A300092E76 /* ImageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C58DA51D56E3A300092E76 /* ImageCollection.swift */; };
 		89C58DAE1D56F76800092E76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C58DAD1D56F76800092E76 /* AppDelegate.swift */; };
@@ -26,6 +30,8 @@
 		25C310D862C7BBA9FD412AAB /* Pods_Collage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Collage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AFBC5B2E630FF67474ADAF1 /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		6FE5EDE36F46E5343C9DF6D2 /* Pods-Collage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Collage.release.xcconfig"; path = "Pods/Target Support Files/Pods-Collage/Pods-Collage.release.xcconfig"; sourceTree = "<group>"; };
+		89316A1E1D57EA1F00E30B6D /* CollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewItem.swift; sourceTree = "<group>"; };
+		89316A211D57F8CC00E30B6D /* CollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewItem.xib; sourceTree = "<group>"; };
 		89518D031D53EA560039F5F2 /* Collage.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Collage.saver; sourceTree = BUILT_PRODUCTS_DIR; };
 		89518D0A1D53EA560039F5F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89518D101D53ECEB0039F5F2 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -106,6 +112,8 @@
 			children = (
 				89518D101D53ECEB0039F5F2 /* MainView.swift */,
 				89C58DC41D571C9500092E76 /* CollageView.swift */,
+				89316A211D57F8CC00E30B6D /* CollectionViewItem.xib */,
+				89316A1E1D57EA1F00E30B6D /* CollectionViewItem.swift */,
 				89C58DA51D56E3A300092E76 /* ImageCollection.swift */,
 				89518D0A1D53EA560039F5F2 /* Info.plist */,
 			);
@@ -224,6 +232,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89316A221D57F8CC00E30B6D /* CollectionViewItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +242,7 @@
 			files = (
 				89C58DB21D56F76800092E76 /* Assets.xcassets in Resources */,
 				89C58DC31D571A0B00092E76 /* MainMenu.xib in Resources */,
+				89316A231D57F8CC00E30B6D /* CollectionViewItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89C58DC51D571C9500092E76 /* CollageView.swift in Sources */,
+				89316A1F1D57EA1F00E30B6D /* CollectionViewItem.swift in Sources */,
 				89518D111D53ECEB0039F5F2 /* MainView.swift in Sources */,
 				89C58DA61D56E3A300092E76 /* ImageCollection.swift in Sources */,
 			);
@@ -336,6 +347,7 @@
 				89C58DBA1D56F77100092E76 /* ImageCollection.swift in Sources */,
 				89C58DC61D571C9500092E76 /* CollageView.swift in Sources */,
 				89C58DAE1D56F76800092E76 /* AppDelegate.swift in Sources */,
+				89316A201D57EA1F00E30B6D /* CollectionViewItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,7 +21,7 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2016 Chloe Stars. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
-	<string>CollageView</string>
+	<string>MainView</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

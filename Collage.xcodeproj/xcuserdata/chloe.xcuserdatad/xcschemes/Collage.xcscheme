@@ -42,6 +42,10 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <PathRunnable
+         runnableDebuggingMode = "0"
+         FilePath = "/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app">
+      </PathRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
@@ -53,7 +57,7 @@
       </MacroExpansion>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-debug -background -module &quot;/Users/hachidorii/Library/Developer/Xcode/DerivedData/Collage-bpuvxdirglmtascuzielulmglrss/Build/Products/Debug/Collage&quot;"
+            argument = "-debug -background -module &quot;Collage&quot;"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

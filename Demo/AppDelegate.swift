@@ -16,7 +16,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     let view: ScreenSaverView! = {
         let view = MainView(frame: CGRect.zero, isPreview: false)
-        view?.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
         return view
     }()
 

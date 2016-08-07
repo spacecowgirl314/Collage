@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11185.3" systemVersion="16A270f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11185.3"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6CP-6Q-c54">
+                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="f2f-2G-0u0"/>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="6CP-6Q-c54" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="BsN-R5-aOL"/>
+                <constraint firstItem="6CP-6Q-c54" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="FeC-1e-aQ7"/>
+                <constraint firstAttribute="trailing" secondItem="6CP-6Q-c54" secondAttribute="trailing" id="Fj7-wu-cGf"/>
+                <constraint firstAttribute="bottom" secondItem="6CP-6Q-c54" secondAttribute="bottom" id="RtV-HD-Ouh"/>
+            </constraints>
+            <point key="canvasLocation" x="-235" y="-143"/>
+        </customView>
+        <collectionViewItem id="SsD-G8-BiC" customClass="CollectionViewItem" customModule="Collage" customModuleProvider="target">
+            <connections>
+                <outlet property="imageView" destination="6CP-6Q-c54" id="09K-L1-kwd"/>
+                <outlet property="view" destination="c22-O7-iKe" id="d3S-Ch-Dp6"/>
+            </connections>
+        </collectionViewItem>
+    </objects>
+</document>

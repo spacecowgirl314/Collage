@@ -15,12 +15,9 @@ class MainView : ScreenSaverView {
     override init?(frame: NSRect, isPreview: Bool) {
         super.init(frame: frame, isPreview: isPreview)
         self.animationTimeInterval = 1/30.0
-        self.wantsLayer = true
-        collageView = CollageView.init(frame: bounds)
-        if let collageView = collageView {
-            collageView.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
-            addSubview(collageView)
-        }
+        self.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
+        self.autoresizesSubviews = true
+//        self.wantsLayer = true
     }
     
     required init?(coder: NSCoder) {
@@ -29,10 +26,19 @@ class MainView : ScreenSaverView {
     
     override func startAnimation() {
         super.startAnimation()
+        collageView = CollageView.init(frame: bounds)
+        if let collageView = collageView {
+            collageView.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
+            collageView.autoresizesSubviews = true
+            addSubview(collageView)
+        }
     }
     
     override func stopAnimation() {
         super.stopAnimation()
+        if let collageView = collageView {
+            collageView.removeFromSuperview()
+        }
     }
     
     override func draw(_ rect: NSRect) {
@@ -40,6 +46,7 @@ class MainView : ScreenSaverView {
     }
     
     override func animateOneFrame() {
+        super.animateOneFrame()
         if let collageView = collageView {
             collageView.setNeedsDisplay(collageView.bounds)
         }
