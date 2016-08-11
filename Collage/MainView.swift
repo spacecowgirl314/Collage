@@ -17,7 +17,6 @@ class MainView : ScreenSaverView {
         self.animationTimeInterval = 1/30.0
         self.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
         self.autoresizesSubviews = true
-//        self.wantsLayer = true
     }
     
     required init?(coder: NSCoder) {
@@ -30,6 +29,7 @@ class MainView : ScreenSaverView {
         if let collageView = collageView {
             collageView.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
             collageView.autoresizesSubviews = true
+            collageView.layer?.backgroundColor = NSColor.white.cgColor
             addSubview(collageView)
         }
     }
@@ -48,6 +48,16 @@ class MainView : ScreenSaverView {
     override func animateOneFrame() {
         super.animateOneFrame()
         if let collageView = collageView {
+            var point = collageView.scrollView.contentView.bounds.origin
+//            Swift.print("\(point) \(test)")
+            if point.y >= (collageView.scrollView.documentView?.bounds.size.height)!-collageView.bounds.size.height {
+                point = NSPoint.zero
+            } else {
+                point = NSPoint(x: point.x, y: point.y+3)
+            }
+            
+            collageView.collectionView?.scroll(point)
+            collageView.scrollView.reflectScrolledClipView(collageView.scrollView.contentView)
             collageView.setNeedsDisplay(collageView.bounds)
         }
     }

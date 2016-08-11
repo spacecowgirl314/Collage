@@ -12,6 +12,9 @@
 		89316A221D57F8CC00E30B6D /* CollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89316A211D57F8CC00E30B6D /* CollectionViewItem.xib */; };
 		89316A231D57F8CC00E30B6D /* CollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89316A211D57F8CC00E30B6D /* CollectionViewItem.xib */; };
 		89518D111D53ECEB0039F5F2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89518D101D53ECEB0039F5F2 /* MainView.swift */; };
+		8955901A1D5C5970008A00C4 /* ORImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 895590181D5C5970008A00C4 /* ORImageView.h */; };
+		8955901B1D5C5970008A00C4 /* ORImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 895590191D5C5970008A00C4 /* ORImageView.m */; };
+		8955901C1D5C5970008A00C4 /* ORImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 895590191D5C5970008A00C4 /* ORImageView.m */; };
 		89C58DA61D56E3A300092E76 /* ImageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C58DA51D56E3A300092E76 /* ImageCollection.swift */; };
 		89C58DAE1D56F76800092E76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C58DAD1D56F76800092E76 /* AppDelegate.swift */; };
 		89C58DB01D56F76800092E76 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C58DAF1D56F76800092E76 /* ViewController.swift */; };
@@ -21,8 +24,6 @@
 		89C58DC31D571A0B00092E76 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C58DC21D571A0B00092E76 /* MainMenu.xib */; };
 		89C58DC51D571C9500092E76 /* CollageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C58DC41D571C9500092E76 /* CollageView.swift */; };
 		89C58DC61D571C9500092E76 /* CollageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C58DC41D571C9500092E76 /* CollageView.swift */; };
-		BFE52913AC4A32D29F639B98 /* Pods_Collage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25C310D862C7BBA9FD412AAB /* Pods_Collage.framework */; };
-		DD5571C89113A981DDE8935F /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDAEEE0E1A797677D25A8E13 /* Pods_Demo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,10 @@
 		89518D031D53EA560039F5F2 /* Collage.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Collage.saver; sourceTree = BUILT_PRODUCTS_DIR; };
 		89518D0A1D53EA560039F5F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89518D101D53ECEB0039F5F2 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		895590161D5C596F008A00C4 /* Collage-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Collage-Bridging-Header.h"; sourceTree = "<group>"; };
+		895590171D5C596F008A00C4 /* Demo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Demo-Bridging-Header.h"; sourceTree = "<group>"; };
+		895590181D5C5970008A00C4 /* ORImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORImageView.h; sourceTree = "<group>"; };
+		895590191D5C5970008A00C4 /* ORImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORImageView.m; sourceTree = "<group>"; };
 		89C58DA51D56E3A300092E76 /* ImageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollection.swift; sourceTree = "<group>"; };
 		89C58DAB1D56F76800092E76 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C58DAD1D56F76800092E76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -52,7 +57,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFE52913AC4A32D29F639B98 /* Pods_Collage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,7 +64,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD5571C89113A981DDE8935F /* Pods_Demo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +118,11 @@
 				89316A211D57F8CC00E30B6D /* CollectionViewItem.xib */,
 				89316A1E1D57EA1F00E30B6D /* CollectionViewItem.swift */,
 				89C58DA51D56E3A300092E76 /* ImageCollection.swift */,
+				895590181D5C5970008A00C4 /* ORImageView.h */,
+				895590191D5C5970008A00C4 /* ORImageView.m */,
 				89518D0A1D53EA560039F5F2 /* Info.plist */,
+				895590161D5C596F008A00C4 /* Collage-Bridging-Header.h */,
+				895590171D5C596F008A00C4 /* Demo-Bridging-Header.h */,
 			);
 			path = Collage;
 			sourceTree = "<group>";
@@ -139,6 +146,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8955901A1D5C5970008A00C4 /* ORImageView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,12 +157,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 89518D0D1D53EA560039F5F2 /* Build configuration list for PBXNativeTarget "Collage" */;
 			buildPhases = (
-				2B46D94978D7AFD715353BC2 /* 📦 Check Pods Manifest.lock */,
 				89518CFE1D53EA560039F5F2 /* Sources */,
 				89518CFF1D53EA560039F5F2 /* Frameworks */,
 				89518D001D53EA560039F5F2 /* Headers */,
 				89518D011D53EA560039F5F2 /* Resources */,
-				534F20EBFD5CF9D8DF8AC587 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -169,12 +175,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 89C58DB91D56F76800092E76 /* Build configuration list for PBXNativeTarget "Demo" */;
 			buildPhases = (
-				9FAC85BFF660980687190409 /* 📦 Check Pods Manifest.lock */,
 				89C58DA71D56F76800092E76 /* Sources */,
 				89C58DA81D56F76800092E76 /* Frameworks */,
 				89C58DA91D56F76800092E76 /* Resources */,
-				7F424F139EE2FA40F26E472C /* 📦 Embed Pods Frameworks */,
-				AB60DA3446853AE038433E49 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -204,6 +207,7 @@
 					89C58DAA1D56F76800092E76 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 7P78LN5MWN;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -248,84 +252,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		2B46D94978D7AFD715353BC2 /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		534F20EBFD5CF9D8DF8AC587 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Collage/Pods-Collage-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7F424F139EE2FA40F26E472C /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Demo/Pods-Demo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9FAC85BFF660980687190409 /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		AB60DA3446853AE038433E49 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Demo/Pods-Demo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		89518CFE1D53EA560039F5F2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -335,6 +261,7 @@
 				89316A1F1D57EA1F00E30B6D /* CollectionViewItem.swift in Sources */,
 				89518D111D53ECEB0039F5F2 /* MainView.swift in Sources */,
 				89C58DA61D56E3A300092E76 /* ImageCollection.swift in Sources */,
+				8955901B1D5C5970008A00C4 /* ORImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +272,7 @@
 				89C58DB01D56F76800092E76 /* ViewController.swift in Sources */,
 				89C58DC11D5717F200092E76 /* MainView.swift in Sources */,
 				89C58DBA1D56F77100092E76 /* ImageCollection.swift in Sources */,
+				8955901C1D5C5970008A00C4 /* ORImageView.m in Sources */,
 				89C58DC61D571C9500092E76 /* CollageView.swift in Sources */,
 				89C58DAE1D56F76800092E76 /* AppDelegate.swift in Sources */,
 				89316A201D57EA1F00E30B6D /* CollectionViewItem.swift in Sources */,
@@ -447,6 +375,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 252D4A59C32104B1A210406E /* Pods-Collage.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 7P78LN5MWN;
 				INFOPLIST_FILE = Collage/Info.plist;
@@ -454,6 +383,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.chloestars.Collage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Collage/Collage-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = saver;
@@ -464,6 +394,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6FE5EDE36F46E5343C9DF6D2 /* Pods-Collage.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 7P78LN5MWN;
 				INFOPLIST_FILE = Collage/Info.plist;
@@ -471,6 +402,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.chloestars.Collage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Collage/Collage-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = saver;
 			};
@@ -481,6 +413,7 @@
 			baseConfigurationReference = E949151A1799479EEF9D5011 /* Pods-Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 7P78LN5MWN;
 				INFOPLIST_FILE = Demo/Info.plist;
@@ -488,6 +421,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.chloestars.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "Collage/Demo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -498,12 +432,14 @@
 			baseConfigurationReference = 5AFBC5B2E630FF67474ADAF1 /* Pods-Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 7P78LN5MWN;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.chloestars.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Collage/Demo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 			};

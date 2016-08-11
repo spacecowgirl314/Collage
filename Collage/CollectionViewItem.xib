@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11185.3" systemVersion="16A270f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11191" systemVersion="16A286a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11185.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11191"/>
+        <plugIn identifier="com.apple.imagekit.ibplugin" version="11191"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner"/>
@@ -10,24 +11,24 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe">
             <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6CP-6Q-c54">
+                <ikImageView wantsLayer="YES" supportsDragAndDrop="NO" doubleClickOpensImageEditPanel="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UD8-H8-AlX" customClass="ORImageView">
                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" id="f2f-2G-0u0"/>
-                </imageView>
+                    <color key="backgroundColor" red="0.50002289" green="0.50002289" blue="0.50002289" alpha="1" colorSpace="deviceRGB"/>
+                </ikImageView>
             </subviews>
             <constraints>
-                <constraint firstItem="6CP-6Q-c54" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="BsN-R5-aOL"/>
-                <constraint firstItem="6CP-6Q-c54" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="FeC-1e-aQ7"/>
-                <constraint firstAttribute="trailing" secondItem="6CP-6Q-c54" secondAttribute="trailing" id="Fj7-wu-cGf"/>
-                <constraint firstAttribute="bottom" secondItem="6CP-6Q-c54" secondAttribute="bottom" id="RtV-HD-Ouh"/>
+                <constraint firstAttribute="bottom" secondItem="UD8-H8-AlX" secondAttribute="bottom" id="48W-Oe-e7R"/>
+                <constraint firstAttribute="trailing" secondItem="UD8-H8-AlX" secondAttribute="trailing" id="J6R-Kp-cts"/>
+                <constraint firstItem="UD8-H8-AlX" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="UU5-SC-hhg"/>
+                <constraint firstItem="UD8-H8-AlX" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="bdW-35-xcG"/>
             </constraints>
             <point key="canvasLocation" x="-235" y="-143"/>
         </customView>
         <collectionViewItem id="SsD-G8-BiC" customClass="CollectionViewItem" customModule="Collage" customModuleProvider="target">
             <connections>
-                <outlet property="imageView" destination="6CP-6Q-c54" id="09K-L1-kwd"/>
+                <outlet property="ikImageView" destination="UD8-H8-AlX" id="5oq-3i-14Z"/>
                 <outlet property="view" destination="c22-O7-iKe" id="d3S-Ch-Dp6"/>
             </connections>
         </collectionViewItem>
