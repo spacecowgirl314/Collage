@@ -50,10 +50,10 @@ class MainView : ScreenSaverView {
         if let collageView = collageView {
             var point = collageView.scrollView.contentView.bounds.origin
 //            Swift.print("\(point) \(test)")
-            if point.y >= (collageView.scrollView.documentView?.bounds.size.height)!-collageView.bounds.size.height {
+            if point.x >= (collageView.scrollView.documentView?.bounds.size.width)!-collageView.bounds.size.width {
                 point = NSPoint.zero
             } else {
-                point = NSPoint(x: point.x, y: point.y+3)
+                point = NSPoint(x: point.x+3, y: point.y)
             }
             
             collageView.collectionView?.scroll(point)

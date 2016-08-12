@@ -70,7 +70,6 @@ static NSDictionary *animations = nil;
     // check if it's a gif
     if ([self isGIF:[url path]] == YES)
     {
-        __block CAKeyframeAnimation *animation;
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             NSImage *image;
             // loads the image
@@ -140,7 +139,6 @@ static NSDictionary *animations = nil;
                         break;
                     }
                 }
-                //            });
             }
         });
     }

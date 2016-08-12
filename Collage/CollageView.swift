@@ -11,7 +11,7 @@ import Cocoa
 
 class CollageView: NSView, ImageCollectionDelegate, NSCollectionViewDataSource, NSCollectionViewDelegate {
     var collectionView: NSCollectionView?
-    var scrollView = NSScrollView()
+    var scrollView = NoScrollView()
     var items: [URL]?
     var images = [URL:NSImage]()
     var collection: ImageCollection!
@@ -42,6 +42,7 @@ class CollageView: NSView, ImageCollectionDelegate, NSCollectionViewDataSource, 
             collectionView.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
             collectionView.autoresizesSubviews = true
             let layout = NSCollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
             layout.sectionInset = EdgeInsets(top: layout.minimumLineSpacing, left: layout.minimumLineSpacing, bottom: layout.minimumLineSpacing, right: layout.minimumLineSpacing)
             collectionView.collectionViewLayout = layout
             scrollView.frame = bounds
@@ -70,12 +71,10 @@ class CollageView: NSView, ImageCollectionDelegate, NSCollectionViewDataSource, 
         items = urls
         if let collectionView = collectionView {
             DispatchQueue.global().async {
+                // TODO: this is redudant and a vestige of caching the images in this view. find another way
                 for (index, item) in self.items!.enumerated() {
                     let image = NSImage(contentsOf: item)
                     self.images[item] = image
-                    //                    DispatchQueue.main.async {
-                    //                        collectionView.insertItems(at: [IndexPath(item: index, section: 0)])
-                    //                    }
                 }
                 DispatchQueue.main.async {
                     collectionView.reloadData()
@@ -96,51 +95,21 @@ class CollageView: NSView, ImageCollectionDelegate, NSCollectionViewDataSource, 
     
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         let item = collectionView.makeItem(withIdentifier: "CollectionViewItem", for: indexPath) as! CollectionViewItem
-//        guard let item = CollectionViewItem else { return item }
         if let url = self.items?[indexPath.item] {
             if let imageView = item.ikImageView {
                 imageView.setImageWith(url)
             }
-            // if the image doesn't exist add it to the cache
-//            if let image = self.images[url] {
-//                if var imageView = item.ikImageView {
-//                    imageView.animator().alphaValue = 0.0
-//                    NSBitmapImageRep(data: image.tiffRepresentation!)
-//                    imageView.setImage(CGImage(copy: image), imageProperties: nil)
-//                    NSAnimationContext.beginGrouping()
-//                    NSAnimationContext.current().duration = 3
-//                    imageView.animator().alphaValue = 1.0
-//                    NSAnimationContext.endGrouping()
-//                }
-//            } else { // image wasn't found, add it to the cache
-//                if let imageView = item.ikImageView {
-//                    imageView.setImageWith(url)
-//                }
-//                DispatchQueue.global().async {
-//                    Swift.print("butts")
-                    
-//                    let image = NSImage(contentsOf: url)
-//                    self.images[url] = image
-//                    if let imageView = item.imageView {
-                        //                        imageView.image = image
-//                    }
-                    // this is a lazy hack to get it to reload with the size from the cached image
-//                    DispatchQueue.main.async {
-//                        self.collectionView?.reloadItems(at: [indexPath])
-//                    }
-//                }
-//            }
         }
         return item
     }
     
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> NSSize {
         if let url = self.items?[indexPath.item] {
-            // if the image doesn't exist add it to the cache
+            // get the cached image's size
             if let image = self.images[url] {
                 return NSSize(width: image.size.width, height: image.size.height)
-            } else { // image wasn't found return standard
-                return NSSize(width: 300, height: 300)
+            } else { // image wasn't found return nothing
+                return NSSize(width: 0, height: 0)
             }
         } else {
             return NSSize(width: 0, height: 0)
@@ -150,13 +119,8 @@ class CollageView: NSView, ImageCollectionDelegate, NSCollectionViewDataSource, 
     func numberOfSections(in collectionView: NSCollectionView) -> Int {
         return 1
     }
-    
-    //    func collectionView(_ collectionView: NSCollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> NSView {
-    //        let view = NSView(frame: NSRect(origin: CGPoint.zero, size: CGSize(width: 200, height: 200)))
-    //        let image = NSImage(named: NSImageNameComputer)
-    //        let imageView = NSImageView(frame: view.bounds)
-    //        imageView.image = image
-    //        view.addSubview(imageView)
-    //        return view
-    //    }
+}
+
+class NoScrollView: NSScrollView {
+    override func scrollWheel(with event: NSEvent) {}
 }
