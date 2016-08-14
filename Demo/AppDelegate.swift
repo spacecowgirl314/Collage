@@ -29,6 +29,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         view.startAnimation()
         Timer.scheduledTimer(timeInterval: view.animationTimeInterval, target: view, selector: #selector(ScreenSaverView.animateOneFrame), userInfo: nil, repeats: true)
     }
+    
+    @IBAction func showPreferences(sender: AnyObject) {
+        guard let sheet = view.configureSheet() else { return }
+        window.beginSheet(sheet, completionHandler: nil)
+    }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application

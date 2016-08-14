@@ -15,6 +15,12 @@
 		8955901A1D5C5970008A00C4 /* ORImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 895590181D5C5970008A00C4 /* ORImageView.h */; };
 		8955901B1D5C5970008A00C4 /* ORImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 895590191D5C5970008A00C4 /* ORImageView.m */; };
 		8955901C1D5C5970008A00C4 /* ORImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 895590191D5C5970008A00C4 /* ORImageView.m */; };
+		895AD25C1D5D726B00D4EC25 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895AD25B1D5D726B00D4EC25 /* PreferencesWindowController.swift */; };
+		895AD25D1D5D726C00D4EC25 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895AD25B1D5D726B00D4EC25 /* PreferencesWindowController.swift */; };
+		895AD25F1D5D78CF00D4EC25 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895AD25E1D5D78CF00D4EC25 /* Preferences.swift */; };
+		895AD2601D5D78CF00D4EC25 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895AD25E1D5D78CF00D4EC25 /* Preferences.swift */; };
+		895AD2621D5D85EB00D4EC25 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 895AD2611D5D85EB00D4EC25 /* Preferences.xib */; };
+		895AD2631D5D85EB00D4EC25 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 895AD2611D5D85EB00D4EC25 /* Preferences.xib */; };
 		89C58DA61D56E3A300092E76 /* ImageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C58DA51D56E3A300092E76 /* ImageCollection.swift */; };
 		89C58DAE1D56F76800092E76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C58DAD1D56F76800092E76 /* AppDelegate.swift */; };
 		89C58DB01D56F76800092E76 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C58DAF1D56F76800092E76 /* ViewController.swift */; };
@@ -40,6 +46,10 @@
 		895590171D5C596F008A00C4 /* Demo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Demo-Bridging-Header.h"; sourceTree = "<group>"; };
 		895590181D5C5970008A00C4 /* ORImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORImageView.h; sourceTree = "<group>"; };
 		895590191D5C5970008A00C4 /* ORImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORImageView.m; sourceTree = "<group>"; };
+		895AD25B1D5D726B00D4EC25 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		895AD25E1D5D78CF00D4EC25 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		895AD2611D5D85EB00D4EC25 /* Preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
+		89B85E1F1D5FCCE40026D716 /* ORImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORImageView.swift; sourceTree = "<group>"; };
 		89C58DA51D56E3A300092E76 /* ImageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollection.swift; sourceTree = "<group>"; };
 		89C58DAB1D56F76800092E76 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C58DAD1D56F76800092E76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,11 +128,15 @@
 				89316A211D57F8CC00E30B6D /* CollectionViewItem.xib */,
 				89316A1E1D57EA1F00E30B6D /* CollectionViewItem.swift */,
 				89C58DA51D56E3A300092E76 /* ImageCollection.swift */,
+				895AD2611D5D85EB00D4EC25 /* Preferences.xib */,
+				895AD25B1D5D726B00D4EC25 /* PreferencesWindowController.swift */,
+				895AD25E1D5D78CF00D4EC25 /* Preferences.swift */,
+				89B85E1F1D5FCCE40026D716 /* ORImageView.swift */,
 				895590181D5C5970008A00C4 /* ORImageView.h */,
 				895590191D5C5970008A00C4 /* ORImageView.m */,
-				89518D0A1D53EA560039F5F2 /* Info.plist */,
 				895590161D5C596F008A00C4 /* Collage-Bridging-Header.h */,
 				895590171D5C596F008A00C4 /* Demo-Bridging-Header.h */,
+				89518D0A1D53EA560039F5F2 /* Info.plist */,
 			);
 			path = Collage;
 			sourceTree = "<group>";
@@ -236,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				895AD2621D5D85EB00D4EC25 /* Preferences.xib in Resources */,
 				89316A221D57F8CC00E30B6D /* CollectionViewItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,6 +261,7 @@
 			files = (
 				89C58DB21D56F76800092E76 /* Assets.xcassets in Resources */,
 				89C58DC31D571A0B00092E76 /* MainMenu.xib in Resources */,
+				895AD2631D5D85EB00D4EC25 /* Preferences.xib in Resources */,
 				89316A231D57F8CC00E30B6D /* CollectionViewItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,6 +273,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				895AD25C1D5D726B00D4EC25 /* PreferencesWindowController.swift in Sources */,
+				895AD25F1D5D78CF00D4EC25 /* Preferences.swift in Sources */,
 				89C58DC51D571C9500092E76 /* CollageView.swift in Sources */,
 				89316A1F1D57EA1F00E30B6D /* CollectionViewItem.swift in Sources */,
 				89518D111D53ECEB0039F5F2 /* MainView.swift in Sources */,
@@ -275,7 +293,9 @@
 				8955901C1D5C5970008A00C4 /* ORImageView.m in Sources */,
 				89C58DC61D571C9500092E76 /* CollageView.swift in Sources */,
 				89C58DAE1D56F76800092E76 /* AppDelegate.swift in Sources */,
+				895AD25D1D5D726C00D4EC25 /* PreferencesWindowController.swift in Sources */,
 				89316A201D57EA1F00E30B6D /* CollectionViewItem.swift in Sources */,
+				895AD2601D5D78CF00D4EC25 /* Preferences.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

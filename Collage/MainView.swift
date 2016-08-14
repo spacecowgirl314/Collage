@@ -11,16 +11,28 @@ import ScreenSaver
 
 class MainView : ScreenSaverView {
     private var collageView: CollageView?
+    private var preferencesWindowController: PreferencesWindowController!
+    
+//    private let preferencesWindowController: PreferencesWindowController = {
+//        let controller = PreferencesWindowController()
+////        controller.loadWindow()
+//        return controller
+//    }()
     
     override init?(frame: NSRect, isPreview: Bool) {
         super.init(frame: frame, isPreview: isPreview)
         self.animationTimeInterval = 1/30.0
         self.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
         self.autoresizesSubviews = true
+        self.preferencesWindowController = PreferencesWindowController()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        self.animationTimeInterval = 1/30.0
+        self.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
+        self.autoresizesSubviews = true
+        self.preferencesWindowController = PreferencesWindowController()
     }
     
     override func startAnimation() {
@@ -63,10 +75,10 @@ class MainView : ScreenSaverView {
     }
     
     override func hasConfigureSheet() -> Bool {
-        return false
+        return true
     }
     
     override func configureSheet() -> NSWindow? {
-        return nil
+        return preferencesWindowController.window
     }
 }

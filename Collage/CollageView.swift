@@ -10,6 +10,8 @@ import Foundation
 import Cocoa
 
 class CollageView: NSView, ImageCollectionDelegate, NSCollectionViewDataSource, NSCollectionViewDelegate {
+    let preferences = Preferences()
+    
     var collectionView: NSCollectionView?
     var scrollView = NoScrollView()
     var items: [URL]?
@@ -32,9 +34,14 @@ class CollageView: NSView, ImageCollectionDelegate, NSCollectionViewDataSource, 
     
     required override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
-        collection = ImageCollection(url: URL(string:"http://cybercatgurrl.tumblr.com/rss")!)
-        collection.delegate = self
-        collection.parse()
+        // TODO: handle multiple feeds and shuffle the results
+        if let first = preferences.urls.first {
+            if let url = URL(string: first) {
+                collection = ImageCollection(url: url)
+                collection.delegate = self
+                collection.parse()
+            }
+        }
         collectionView = NSCollectionView.init(frame: bounds)
         if let collectionView = collectionView {
             collectionView.dataSource = self
@@ -54,6 +61,7 @@ class CollageView: NSView, ImageCollectionDelegate, NSCollectionViewDataSource, 
             scrollView.horizontalScroller?.alphaValue = 0.0
             scrollView.borderType = .noBorder
             scrollView.documentView = collectionView
+            NotificationCenter.default.addObserver(self, selector: #selector(reload), name: PreferencesChangedNotificationName, object: nil)
             self.addSubview(scrollView)
         }
     }
@@ -62,17 +70,23 @@ class CollageView: NSView, ImageCollectionDelegate, NSCollectionViewDataSource, 
         super.init(coder: coder)
     }
     
-    // what is this private API thing that keeps being called????
-    //    class func spansScreens() -> ObjCBool {
-    //        return ObjCBool(false)
-    //    }
+    func reload() {
+        // this is a temporary solution until we process multiple feeds
+        if let first = preferences.urls.first {
+            if let url = URL(string: first) {
+                collection = ImageCollection(url: url)
+                collection.delegate = self
+                collection.parse()
+            }
+        }
+    }
     
     func didFinishLoading(urls: [URL]) {
         items = urls
         if let collectionView = collectionView {
             DispatchQueue.global().async {
                 // TODO: this is redudant and a vestige of caching the images in this view. find another way
-                for (index, item) in self.items!.enumerated() {
+                for (_, item) in self.items!.enumerated() {
                     let image = NSImage(contentsOf: item)
                     self.images[item] = image
                 }
@@ -107,7 +121,7 @@ class CollageView: NSView, ImageCollectionDelegate, NSCollectionViewDataSource, 
         if let url = self.items?[indexPath.item] {
             // get the cached image's size
             if let image = self.images[url] {
-                return NSSize(width: image.size.width, height: image.size.height)
+                return NSSize(width: image.size.width/CGFloat(preferences.scale+1.0), height: image.size.height/CGFloat(preferences.scale+1.0))
             } else { // image wasn't found return nothing
                 return NSSize(width: 0, height: 0)
             }
