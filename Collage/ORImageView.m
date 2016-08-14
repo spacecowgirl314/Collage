@@ -15,10 +15,7 @@
 @implementation NSImage (CGImage)
 
 - (CGImageRef)CGImage {
-    NSData *imageData = self.TIFFRepresentation;
-    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)imageData, NULL);
-    CGImageRef maskRef =  CGImageSourceCreateImageAtIndex(source, 0, NULL);
-    return maskRef;
+    return [self CGImageForProposedRect:NULL context:nil hints:nil];
 }
 
 @end
@@ -73,7 +70,7 @@ static NSDictionary *animations = nil;
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             NSImage *image;
             // loads the image
-            if ([animations objectForKey:url.absoluteString] != nil) {
+            if (animations[url.absoluteString]) {
                 // add the animation to the layer
                 dispatch_async(dispatch_get_main_queue(), ^(void){
                     [[self overlayForType:IKOverlayTypeImage] addAnimation:animations[url.absoluteString] forKey:@"contents"];
@@ -83,7 +80,6 @@ static NSDictionary *animations = nil;
             } else {
                 //Background Thread
                 image = [[NSImage alloc] initWithContentsOfURL:url];
-                //            dispatch_async(dispatch_get_main_queue(), ^(void){
                 // get the image representations, and iterate through them
                 NSArray * reps = [image representations];
                 for (NSImageRep * rep in reps) {
@@ -147,7 +143,7 @@ static NSDictionary *animations = nil;
 //    [super setImageWithURL:url];
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         id cache = [images objectForKey:url.absoluteString];
-        if ([images objectForKey:url.absoluteString] != nil) {
+        if (images[url.absoluteString]) {
             NSImage *image = cache;
             struct CGImage *cgImage = [image CGImage];
             dispatch_async(dispatch_get_main_queue(), ^(void){

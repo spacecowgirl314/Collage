@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// The ImageCollectionViewDelegate protocol defines methods for managing the response from the parser in an instance of ImageCollection.
+/// The ImageCollectionDelegate protocol defines methods for managing the response from the parser in an instance of ImageCollection.
 protocol ImageCollectionDelegate: class {
     /// This method is called from an instance of ImageCollection when it has finished successfully parsing the image URLs.
     ///
