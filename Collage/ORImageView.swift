@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import CoreGraphics
+import Cocoa
+import Quartz
 
 var images = [URL:CGImage]()
 var animations = [URL:CAKeyframeAnimation]()
@@ -21,7 +22,6 @@ extension NSImage {
 }
 
 class ORImageView: IKImageView {
-    
     override func awakeFromNib() {
         // create an overlay for the image (which is used to play animated gifs)
         // EDIT: well, don't do that here, due to some initialization orders

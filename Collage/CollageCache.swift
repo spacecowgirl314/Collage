@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Quartz
 
 class CollageCache {
     static var sharedCache = CollageCache()
