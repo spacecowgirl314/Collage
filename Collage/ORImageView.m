@@ -15,15 +15,20 @@
 @implementation NSImage (CGImage)
 
 - (CGImageRef)CGImage {
-    return [self CGImageForProposedRect:NULL context:nil hints:nil];
+    NSData *imageData = self.TIFFRepresentation;
+    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)imageData, NULL);
+    CGImageRef maskRef =  CGImageSourceCreateImageAtIndex(source, 0, NULL);
+    CFRelease(source);
+    return (CGImageRef)CFAutorelease(maskRef);;
 }
 
 @end
 
-@implementation ORImageView
+NSMutableDictionary *imageCache = nil;
+NSMutableDictionary<NSString *, CAKeyframeAnimation *> *animationCache = nil;
+NSMutableDictionary<NSString *, NSValue *> *sizeCache = nil;
 
-static NSDictionary *images = nil;
-static NSDictionary *animations = nil;
+@implementation ORImageView
 
 -(void)awakeFromNib {
     // create an overlay for the image (which is used to play animated gifs)
@@ -32,15 +37,19 @@ static NSDictionary *animations = nil;
     //       I leave that line here for the records ^^
     //[self setOverlay:[CALayer layer] forType:IKOverlayTypeImage];
 
+    if (!animationCache) {
+        animationCache = [NSMutableDictionary new];
+    }
+    if (!imageCache) {
+        imageCache = [NSMutableDictionary new];
+    }
+    if (!sizeCache) {
+        sizeCache = [NSMutableDictionary new];
+    }
+    
     // NOTE: calling this before anything else seems to fix a lot of
     //       problems ... maybe it's initializing a few things internally
     //       on the first call ...
-    if (!animations) {
-        animations = [NSMutableDictionary new];
-    }
-    if (!images) {
-        images = [NSMutableDictionary new];
-    }
     [super setImageWithURL:nil];
 }
 
@@ -52,7 +61,7 @@ static NSDictionary *animations = nil;
     return [pathExtension isEqualToString:@"gif"];
 }
 
--(void)setImageWithURL:(NSURL *)url
+-(void)setImageWithURL:(NSURL *)url collectionLayout:(NSCollectionViewLayout*)collectionLayout
 {
     self.alphaValue = 0.0;
     // EDIT: this is where we create the overlay now, but only if it doesn't
@@ -70,16 +79,17 @@ static NSDictionary *animations = nil;
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             NSImage *image;
             // loads the image
-            if (animations[url.absoluteString]) {
+            if (animationCache[url.absoluteString]) {
                 // add the animation to the layer
                 dispatch_async(dispatch_get_main_queue(), ^(void){
-                    [[self overlayForType:IKOverlayTypeImage] addAnimation:animations[url.absoluteString] forKey:@"contents"];
+                    [[self overlayForType:IKOverlayTypeImage] addAnimation:animationCache[url.absoluteString] forKey:@"contents"];
                     self.alphaValue = 1.0;
                 });
                 return;
             } else {
-                //Background Thread
                 image = [[NSImage alloc] initWithContentsOfURL:url];
+                sizeCache[url] = [NSValue valueWithSize:image.size];
+                [collectionLayout invalidateLayout];
                 // get the image representations, and iterate through them
                 NSArray * reps = [image representations];
                 for (NSImageRep * rep in reps) {
@@ -126,7 +136,7 @@ static NSDictionary *animations = nil;
                         // add the animation to the layer
                         dispatch_async(dispatch_get_main_queue(), ^(void){
                             [[self overlayForType:IKOverlayTypeImage] addAnimation:animation forKey:@"contents"];
-                            [animations setValue:animation forKey:url.absoluteString];
+                            [animationCache setValue:animation forKey:url.absoluteString];
                             self.alphaValue = 1.0;
                         });
                         
@@ -142,10 +152,8 @@ static NSDictionary *animations = nil;
     // calls the super setImageWithURL method to handle standard images
 //    [super setImageWithURL:url];
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        id cache = [images objectForKey:url.absoluteString];
-        if (images[url.absoluteString]) {
-            NSImage *image = cache;
-            struct CGImage *cgImage = [image CGImage];
+        if (imageCache[url.absoluteString]) {
+            struct CGImage *cgImage = (__bridge struct CGImage *)(imageCache[url.absoluteString]);
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 [super setImage:cgImage imageProperties:nil];
                 self.alphaValue = 1.0;
@@ -153,8 +161,10 @@ static NSDictionary *animations = nil;
         }
         else {
             NSImage *image = [[NSImage alloc] initWithContentsOfURL:url];
+            sizeCache[url] = [NSValue valueWithSize:image.size];
+            [collectionLayout invalidateLayout];
             struct CGImage *cgImage = [image CGImage];
-            [images setValue:image forKey:url.absoluteString];
+            [imageCache setValue:(__bridge id _Nullable)(cgImage) forKey:url.absoluteString];
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 [super setImage:cgImage imageProperties:nil];
                 self.alphaValue = 1.0;

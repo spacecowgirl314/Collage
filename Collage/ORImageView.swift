@@ -13,7 +13,7 @@ var images = [URL:CGImage]()
 var animations = [URL:CAKeyframeAnimation]()
 
 extension NSImage {
-    func CGImage() -> CGImage? {
+    func cgImage() -> CGImage? {
         guard let data = self.tiffRepresentation else { return nil }
         guard let source = CGImageSourceCreateWithData(data, nil) else { return nil }
         return CGImageSourceCreateImageAtIndex(source, 0, nil)
@@ -36,23 +36,108 @@ class ORImageView: IKImageView {
     }
     
     func isGIF(path: URL) -> Bool {
+        return true
         let pathExtension = path.pathExtension.lowercased()
         return pathExtension == "gif"
     }
     
-    override func setImageWith(_ url: URL!) {
+    func setImageWith(_ url: URL!, layout: NSCollectionViewLayout!) {
         self.alphaValue = 0.0
-        if self.overlay(forType: IKOverlayTypeImage) != nil {
-//            self
+        if self.overlay(forType: IKOverlayTypeImage) == nil {
+            self.setOverlay(CALayer(), forType: IKOverlayTypeImage)
         }
         
         self.overlay(forType: IKOverlayTypeImage).removeAllAnimations()
         
         if isGIF(path: url) {
             DispatchQueue.global().async {
-                if animations[url] {
-                    self.overlay(forType: IKOverlayTypeImage).add(animations[url], forKey: "contents")
+                // capture layout here and prevent it from being released
+                let layout = layout
+                
+                if let animation = CollageCache.sharedCache.animationCache[url.absoluteString] {
+                    DispatchQueue.main.async {
+                        self.overlay(forType: IKOverlayTypeImage).add(animation, forKey: "contents")
+                        self.alphaValue = 1.0
+                    }
+                }
+                else {
+                    if let image = NSImage(contentsOf: url) {
+                        CollageCache.sharedCache.sizeCache[url.absoluteString] = image.size
+                        layout?.invalidateLayout()
+                        // get the image representations, and iterate through them
+                        let reps = image.representations
+                        for case let rep as NSBitmapImageRep in reps {
+                            // get the number of frames. If it's 0, it's not an animated gif, do nothing
+                            guard let numberOfFrames = rep.value(forProperty: NSImageFrameCount) as? Int else { break }
+                            if numberOfFrames == 0 { break }
+                            
+                            // create a value array which whill contain the frames of the animation
+                            var values = [CGImage]()
+                            
+                            // loop through the animation frames (animationDuration is the duration of the whole animation)
+                            var animationDuration = 0.0
+                            for i in 0..<numberOfFrames {
+                                // set the current frame
+                                rep.setProperty(NSImageCurrentFrame, withValue: i)
+                                
+                                // this part is optional. For some reasons, the NSImage class often loads a GIF with
+                                // frame times of 0, so the GIF plays extremely fast. So, we check the frame duration, and if it's
+                                // less than a threshold value, we set it to a default value of 1/20 second.
+                                if rep.value(forProperty: NSImageCurrentFrameDuration)!.doubleValue < 0.000001 {
+                                    rep.setProperty(NSImageCurrentFrameDuration, withValue: 1.0 / 20.0)
+                                }
+                                
+                                // add the CGImage to this frame to the value array
+                                values.append(rep.cgImage!)
+                                
+                                // update the duration of the animation
+                                animationDuration += rep.value(forProperty: NSImageCurrentFrameDuration)!.doubleValue
+                            }
+                            
+                            // create and setup the animation (this is pretty straightforward)
+                            let animation = CAKeyframeAnimation(keyPath: "contents")
+                            animation.values = values
+                            animation.calculationMode = "discrete"
+                            animation.duration = animationDuration
+                            animation.repeatCount = Float.infinity
+                            
+                            // add the animation to the layer
+                            DispatchQueue.main.async {
+                                layout?.invalidateLayout()
+                                self.overlay(forType: IKOverlayTypeImage).add(animation, forKey: "contents")
+                                CollageCache.sharedCache.animationCache[url.absoluteString] = animation
+                                self.alphaValue = 1.0
+                            }
+                            
+                            // stops at the first valid representation
+                            break
+                        }
+                    }
+                }
+            }
+        }
+        
+        // calls the super setImageWithURL method to handle standard images
+        DispatchQueue.global().async {
+            // capture layout here and prevent it from being released
+            let layout = layout
+            
+            if let image = CollageCache.sharedCache.imageCache[url.absoluteString] {
+                DispatchQueue.main.async {
+                    super.setImage(image, imageProperties: nil)
                     self.alphaValue = 1.0
+                }
+            }
+            else {
+                if let image = NSImage(contentsOf: url) {
+                    CollageCache.sharedCache.sizeCache[url.absoluteString] = image.size
+                    let cgImage = image.cgImage()
+                    CollageCache.sharedCache.imageCache[url.absoluteString] = cgImage
+                    DispatchQueue.main.async {
+                        layout?.invalidateLayout()
+                        super.setImage(cgImage, imageProperties: nil)
+                        self.alphaValue = 1.0
+                    }
                 }
             }
         }

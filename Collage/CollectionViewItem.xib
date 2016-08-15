@@ -13,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <ikImageView wantsLayer="YES" supportsDragAndDrop="NO" doubleClickOpensImageEditPanel="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UD8-H8-AlX" customClass="ORImageView">
+                <ikImageView wantsLayer="YES" zoomFactor="0.0" supportsDragAndDrop="NO" doubleClickOpensImageEditPanel="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UD8-H8-AlX" customClass="ORImageView" customModule="Collage" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                     <color key="backgroundColor" red="0.50002289" green="0.50002289" blue="0.50002289" alpha="1" colorSpace="deviceRGB"/>
                 </ikImageView>

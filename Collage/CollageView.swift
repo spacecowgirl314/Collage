@@ -13,6 +13,7 @@ class CollageView: NSView, ImageCollectionDelegate, NSCollectionViewDataSource, 
     let preferences = Preferences()
     
     var collectionView: NSCollectionView?
+    var collectionLayout: NSCollectionViewFlowLayout?
     var scrollView = NoScrollView()
     var items: [URL]?
     var images = [URL:NSImage]()
@@ -48,10 +49,10 @@ class CollageView: NSView, ImageCollectionDelegate, NSCollectionViewDataSource, 
             collectionView.delegate = self
             collectionView.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
             collectionView.autoresizesSubviews = true
-            let layout = NSCollectionViewFlowLayout()
-            layout.scrollDirection = .horizontal
-            layout.sectionInset = EdgeInsets(top: layout.minimumLineSpacing, left: layout.minimumLineSpacing, bottom: layout.minimumLineSpacing, right: layout.minimumLineSpacing)
-            collectionView.collectionViewLayout = layout
+            collectionLayout = NSCollectionViewFlowLayout()
+            collectionLayout?.scrollDirection = .horizontal
+            collectionLayout?.sectionInset = EdgeInsets(top: collectionLayout!.minimumLineSpacing, left: collectionLayout!.minimumLineSpacing, bottom: collectionLayout!.minimumLineSpacing, right: collectionLayout!.minimumLineSpacing)
+            collectionView.collectionViewLayout = collectionLayout
             scrollView.frame = bounds
             scrollView.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
             scrollView.autoresizesSubviews = true
@@ -74,6 +75,11 @@ class CollageView: NSView, ImageCollectionDelegate, NSCollectionViewDataSource, 
         // this is a temporary solution until we process multiple feeds
         if let first = preferences.urls.first {
             if let url = URL(string: first) {
+                CollageCache.sharedCache.animationCache.removeAll()
+                CollageCache.sharedCache.imageCache.removeAll()
+                CollageCache.sharedCache.sizeCache.removeAll()
+                items?.removeAll()
+                collectionView?.reloadData()
                 collection = ImageCollection(url: url)
                 collection.delegate = self
                 collection.parse()
@@ -84,16 +90,7 @@ class CollageView: NSView, ImageCollectionDelegate, NSCollectionViewDataSource, 
     func didFinishLoading(urls: [URL]) {
         items = urls
         if let collectionView = collectionView {
-            DispatchQueue.global().async {
-                // TODO: this is redudant and a vestige of caching the images in this view. find another way
-                for (_, item) in self.items!.enumerated() {
-                    let image = NSImage(contentsOf: item)
-                    self.images[item] = image
-                }
-                DispatchQueue.main.async {
-                    collectionView.reloadData()
-                }
-            }
+                collectionView.reloadData()
         }
     }
     
@@ -102,16 +99,15 @@ class CollageView: NSView, ImageCollectionDelegate, NSCollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let items = items {
-            return items.count
-        } else { return 0 }
+        guard let items = items else { return 0 }
+        return items.count
     }
     
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         let item = collectionView.makeItem(withIdentifier: "CollectionViewItem", for: indexPath) as! CollectionViewItem
         if let url = self.items?[indexPath.item] {
             if let imageView = item.ikImageView {
-                imageView.setImageWith(url)
+                imageView.setImageWith(url, layout: collectionLayout!)
             }
         }
         return item
@@ -120,13 +116,14 @@ class CollageView: NSView, ImageCollectionDelegate, NSCollectionViewDataSource, 
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> NSSize {
         if let url = self.items?[indexPath.item] {
             // get the cached image's size
-            if let image = self.images[url] {
-                return NSSize(width: image.size.width/CGFloat(preferences.scale+1.0), height: image.size.height/CGFloat(preferences.scale+1.0))
+            if let size = CollageCache.sharedCache.sizeCache[url.absoluteString] {
+                return NSSize(width: size.width/CGFloat(preferences.scale+1.0), height: size.height/CGFloat(preferences.scale+1.0))
+                
             } else { // image wasn't found return nothing
-                return NSSize(width: 0, height: 0)
+                return NSSize.zero
             }
         } else {
-            return NSSize(width: 0, height: 0)
+            return NSSize.zero
         }
     }
     
