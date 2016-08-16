@@ -14,12 +14,8 @@ class CollectionViewItem: NSCollectionViewItem {
     @IBOutlet var ikImageView: ORImageView?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
-        self.view.autoresizesSubviews = true
         if let imageView = ikImageView {
             imageView.backgroundColor = NSColor.clear
-            imageView.canDrawSubviewsIntoLayer = true
-            imageView.wantsLayer = true
         }
     }
 }

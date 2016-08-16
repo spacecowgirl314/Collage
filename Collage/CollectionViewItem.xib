@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11191" systemVersion="16A286a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11191"/>
         <plugIn identifier="com.apple.imagekit.ibplugin" version="11191"/>
     </dependencies>
@@ -19,10 +18,10 @@
                 </ikImageView>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="UD8-H8-AlX" secondAttribute="bottom" id="48W-Oe-e7R"/>
-                <constraint firstAttribute="trailing" secondItem="UD8-H8-AlX" secondAttribute="trailing" id="J6R-Kp-cts"/>
-                <constraint firstItem="UD8-H8-AlX" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="UU5-SC-hhg"/>
-                <constraint firstItem="UD8-H8-AlX" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="bdW-35-xcG"/>
+                <constraint firstAttribute="trailing" secondItem="UD8-H8-AlX" secondAttribute="trailing" id="7Nh-zA-fOo"/>
+                <constraint firstItem="UD8-H8-AlX" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="CaK-OI-OKq"/>
+                <constraint firstItem="UD8-H8-AlX" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="GRX-zl-M9g"/>
+                <constraint firstAttribute="bottom" secondItem="UD8-H8-AlX" secondAttribute="bottom" id="Yzr-bu-L2O"/>
             </constraints>
             <point key="canvasLocation" x="-235" y="-143"/>
         </customView>

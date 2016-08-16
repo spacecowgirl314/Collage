@@ -125,6 +125,10 @@ class ORImageView: IKImageView {
             if let image = CollageCache.sharedCache.imageCache[url.absoluteString] {
                 DispatchQueue.main.async {
                     super.setImage(image, imageProperties: nil)
+                    // why setting the zoom here and not in the animation layer baffles me..
+                    // tbf i don't even know why this whole code block works at all..
+                    // don't blame me, i didn't write it, i just translated it to Swift
+                    self.setImageZoomFactor(1.0, center: .zero)
                     self.alphaValue = 1.0
                 }
             }
@@ -136,6 +140,8 @@ class ORImageView: IKImageView {
                     DispatchQueue.main.async {
                         layout?.invalidateLayout()
                         super.setImage(cgImage, imageProperties: nil)
+                        // ayup
+                        self.setImageZoomFactor(1.0, center: .zero)
                         self.alphaValue = 1.0
                     }
                 }
